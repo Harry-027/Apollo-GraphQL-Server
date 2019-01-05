@@ -1,8 +1,18 @@
 
 export default (sequelize, DataTypes) => {
-  var User = sequelize.define('User', {
+  const User = sequelize.define('User', {
     username: DataTypes.STRING
   });
 
+  User.associate = (models) => {
+    // 1 to many
+    User.hasMany(models.Board, {
+      foreignKey: 'owner'
+    });
+    // 1 to many
+    User.hasMany(models.Suggestion, {
+      foreignKey: 'creatorId'
+    });
+  }
   return User;
 };
