@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-const sequelize = new Sequelize('test_graphql_db', 'dell', 'benawad', {
+const sequelize = new Sequelize('test_graphql', 'test_user', 'password', {
   host: 'localhost',
   dialect: 'postgres'
 });
@@ -18,6 +18,5 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 export default db;

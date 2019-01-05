@@ -4,11 +4,5 @@ export default (sequelize, DataTypes) => {
       text: DataTypes.STRING
     });
   
-    Suggestion.associate = (models) => {
-      // 1 to many
-      Suggestion.hasMany(models.Suggestion, {
-        foreignKey: 'boardId'
-      });
-    }
     return Suggestion;
   };
