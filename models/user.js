@@ -9,6 +9,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
+    isAdmin: DataTypes.BOOLEAN,
     password: DataTypes.STRING
   });
 

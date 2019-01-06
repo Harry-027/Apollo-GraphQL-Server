@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import { PubSub } from 'graphql-subscriptions'
+import { requiresAuth, requiresAdmin } from './permissions';
 
 const USER_ADDED = 'USER_ADDED';
 
@@ -83,7 +84,7 @@ export default {
             username: newUserName
         }, { where: { username } }),
         deleteUser: (parent, { username }, { models }) => models.User.destroy({ where: { username: username } }),
-        createBoard: (parent, args, { models }) => models.Board.create(args),
+        createBoard: requiresAuth.createResolver((parent, args, { models }) => models.Board.create(args)),
         createSuggestion: (parent, args, { models }) => models.Suggestion.create(args),
     }
 }
