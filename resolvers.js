@@ -1,3 +1,7 @@
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import _ from 'lodash';
+
 export default {
     User: {
         boards: (parent, args, { models }) => models.Board.findAll({
@@ -37,7 +41,30 @@ export default {
     },
 
     Mutation: {
-        createUser: (parent, args, { models }) => models.User.create(args),
+        register: async (parent, args, { models }) => {
+            const user = args;
+            user.password = await bcrypt.hash(user.password, 12);
+            return models.User.create(user)
+        },
+        login: async (parent, { email, password }, { models, SECRET }) => {
+            const user = await models.User.findOne({ where: { email } });
+            if (!user) {
+                throw new Error('No User found');
+            }
+
+            const valid = bcrypt.compare(password, user.password);
+            if (!valid) {
+                throw new Error('Incorrect Password');
+            }
+
+            const token = jwt.sign({
+                user: _.pick(user, ['id', 'username'])
+            }, SECRET, {
+                    expiresIn: '1y'
+                });
+
+            return token;
+        },
         updateUser: (parent, { username, newUserName }, { models }) => models.User.update({
             username: newUserName
         }, { where: { username } }),
