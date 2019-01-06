@@ -14,20 +14,22 @@
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "graphql": "^14.0.2",
     "graphql-server-express": "^1.4.0",
+    "graphql-subscriptions": "^1.0.0",
     "graphql-tools": "^4.0.3",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "pg": "^7.7.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.42.0"
+    "sequelize": "^4.42.0",
+    "subscriptions-transport-ws": "^0.9.15"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-latest": "^6.24.1",
     "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "graphql": "^14.0.2"
+    "eslint-plugin-import": "^2.14.0"
   }
 }
